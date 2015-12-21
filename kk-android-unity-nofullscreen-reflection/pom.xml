@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <prerequisites>
+        <maven>3.1.1</maven>
+    </prerequisites>
+
+    <parent>
+        <groupId>jp.ne.sakura.kkkon.android.unitynofullscreen</groupId>
+        <artifactId>kk-unitynofullscreen-pom</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>jp.ne.sakura.kkkon.android.unitynofullscreen</groupId>
+    <artifactId>kk-unitynofullscreen-reflection</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>KK's Android Unity NoFullscreen Reflection</name>
+    <description>KK's Android Unity NoFullscreen Reflection</description>
+
+  <licenses>
+    <license>
+      <name>The MIT license</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>kkkon</id>
+      <name>Kiyofumi Kondoh</name>
+    </developer>
+  </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.5</maven.compiler.source>
+        <maven.compiler.target>1.5</maven.compiler.target>
+        
+        <android.sdk.path>${env.ANDROID_HOME}</android.sdk.path>
+
+        <dryRun>true</dryRun>
+        <github.site.dryRun>true</github.site.dryRun>
+        <github.site.skip>true</github.site.skip> <!-- over 0.9 -->
+        <ignoreSnapshots>true</ignoreSnapshots>
+    </properties>
+
+    <build>
+<!--
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+-->
+
+        <plugins>
+            <plugin>
+                <groupId>com.simpligility.maven.plugins</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <version>4.3.0</version>
+                <configuration>
+                    <sdkPlatform>10</sdkPlatform>
+                </configuration>
+            </plugin>
+            <!--
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <version>3.8.2</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <sdkPlatform>10</sdkPlatform>
+                </configuration>
+            </plugin>
+            -->
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.4</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <skipDeploy>true</skipDeploy>
+                    <siteDirectory>${basedir}/site</siteDirectory>
+                    <outputDirectory>${project.reporting.outputDirectory}/site/${project.artifactId}</outputDirectory>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>2.3.3</version>
+            <scope>system</scope>
+            <systemPath>${android.sdk.path}/platforms/android-10/android.jar</systemPath>
+        </dependency>
+
+    </dependencies>
+
+
+    <profiles>
+        <profile>
+            <id>release-profile</id>
+
+            <properties>
+                <proguard.skip>false</proguard.skip>
+                <android.release>true</android.release>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>
